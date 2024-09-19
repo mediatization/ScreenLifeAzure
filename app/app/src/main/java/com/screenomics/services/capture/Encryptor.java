@@ -26,17 +26,24 @@ class Encryptor {
         FileInputStream fis = new FileInputStream(inPath);
         FileOutputStream fos = new FileOutputStream(outPath);
 
+        // Grab the first 10 chars of the filename
         String fname = filename.substring(10);
         System.out.println("ENCRYPTING WITH FNAME " + fname);
+        // Get 8 bytes from an encrypted version of fname, using SHA-256
         byte[] ivBytes = Arrays.copyOfRange(getSHA(fname), 0, 7);
 
         System.out.println("ENCRYPTING WITH KEY " + toHex(key));
         System.out.println("ENCRYPTING WITH IV " + toHex(ivBytes));
 
+        // Create a secret key spec using the key and AES/GCM/NoPadding algorithm
         SecretKeySpec secretKeySpec = new SecretKeySpec(key,"AES/GCM/NoPadding");
+        // Create a GCMParameterSpec of length 16 * 8, with the iv bytes
         GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(16 * 8, ivBytes);
+        // Create an AES/GCM/NoPadding cipher
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        // Set the cypher to encrypt using the secret key spec and gcm paramter spec
         cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, gcmParameterSpec);
+        // Run the file through the cipher and into a cipher output stream
         CipherOutputStream cos = new CipherOutputStream(fos, cipher);
         int b;
         byte[] d = new byte[8];

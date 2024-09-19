@@ -424,7 +424,7 @@ ipcMain.handle("register", async (event, args) => {
         console.log("Missing name on registration");
         return;
     }
-
+    
     const key = crypto.randomBytes(32); 
     const iv = crypto.randomBytes(16);
 
