@@ -44,6 +44,7 @@ public class CaptureService extends Service {
     private static final DateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
     private static final int DISPLAY_WIDTH = 720;
     private static final int DISPLAY_HEIGHT = 1280;
+    private static final int CAPTURE_INTERVAL_VALUE = 3000;
     public static byte[] key;
     private static Intent intent;
     private static int resultCode;
@@ -141,7 +142,7 @@ public class CaptureService extends Service {
 
                     // notifications.notifyImageCaptured();
                 }
-                mHandler.postDelayed(captureInterval, 5000);
+                mHandler.postDelayed(captureInterval, CAPTURE_INTERVAL_VALUE);
             }
         };
 
@@ -206,7 +207,7 @@ public class CaptureService extends Service {
             capture = true;
 
             mHandler.post(insertStartImage);
-            mHandler.postDelayed(captureInterval, 2000);
+            mHandler.postDelayed(captureInterval, CAPTURE_INTERVAL_VALUE);
         } catch (Exception e) {
             e.printStackTrace();
         }
