@@ -42,6 +42,7 @@ public class UploadScheduler extends BroadcastReceiver {
         alarm.cancel(this.alarmIntent);
     }
 
+    //sets an alarm to go off in a certain amount of time, presumably for auto uploading?
     public static void setAlarmInXSeconds(Context context, int seconds) {
         Calendar cal = Calendar.getInstance();
         long now = System.currentTimeMillis();
@@ -63,6 +64,10 @@ public class UploadScheduler extends BroadcastReceiver {
         alarm.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
     }
 
+
+    //still not sure where/how this is getting called
+    //presumably the startForegroundService call will call one of the other files in this folder
+    //and that is where all the intent/context variables originate from
     public static void startUpload(Context context, boolean continueWithoutWifi) {
         File f_encrypt =
                 new File(context.getExternalFilesDir(null).getAbsolutePath() + File.separator +
@@ -81,6 +86,8 @@ public class UploadScheduler extends BroadcastReceiver {
         }
     }
 
+    //sets an alarm to go off at a specific hour/minute, seems to have some functional differences
+    //to setAlarmInXSeconds due to the use of alarm.setRepeating function call at the end here
     private void setAlarm(int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         long now = System.currentTimeMillis();
@@ -100,6 +107,7 @@ public class UploadScheduler extends BroadcastReceiver {
                 AlarmManager.INTERVAL_DAY, alarmIntent);
     }
 
+    //presumably called somewhere in the XML
     @Override
     public void onReceive(Context context, Intent intent) {
         if (InternetConnection.checkWiFiConnection(context)) {
