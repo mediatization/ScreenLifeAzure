@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.UNMETERED)
                 .build();
+        // Creates a periodic work request using SenderWorker, presumably sending every hour
         PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(
                 SenderWorker.class,
                 1,
