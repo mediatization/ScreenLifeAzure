@@ -270,7 +270,7 @@ public class UploadService extends Service {
     }
 
     //according to android studio this can cause leaks, probably the source of the crashes
-    //reads the return codes of the batches and deletes files that were sucessfully uploaded
+    //reads the return codes of the batches and deletes files that were successfully uploaded
     public class Sender extends AsyncTask<Batch, Integer, Void> {
         @Override
         protected Void doInBackground(Batch... batches) {

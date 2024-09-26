@@ -33,7 +33,7 @@ public class SenderWorker extends Worker {
 
     //fields were originally copy/pasted from upload service but most of them
     //were not used within SenderWorker. Most have been either deleted or turned
-    //into stack variables to tru and improve the readability of the code
+    //into stack variables to try and improve the readability of the code
 
     //stores all the batches sent by the sender worker
     private final List<Batch> batches = new ArrayList<>();
